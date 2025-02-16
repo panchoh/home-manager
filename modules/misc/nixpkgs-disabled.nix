@@ -64,9 +64,13 @@ in {
 
   config = {
     assertions = [{
-      assertion = cfg.config == null && cfg.overlays == null;
+      assertion = (cfg.config == null || builtins.attrNames cfg.config == []) && (cfg.overlays == null || cfg.overlays == []);
       message = ''
         `nixpkgs` options are disabled when `home-manager.useGlobalPkgs` is enabled.
+
+        Current values:
+        cfg.config = ${builtins.toJSON cfg.config}
+        cfg.overlays = ${builtins.toJSON cfg.overlays}
       '';
     }];
   };
