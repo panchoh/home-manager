@@ -173,8 +173,7 @@ in
         })
 
         (lib.mkIf config.programs.fish.preferAbbrs {
-          shellAliases = optionsAlias;
-          shellAbbrs = optionalAttrs cfg.enableFishIntegration aliases;
+          shellAbbrs = optionsAlias // optionalAttrs cfg.enableFishIntegration aliases;
         })
       ];
 
